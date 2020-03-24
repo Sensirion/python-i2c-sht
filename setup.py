@@ -49,7 +49,11 @@ setup(
             'pytest-cov~=2.6.0',
             'sensirion-shdlc-sensorbridge~=0.1.1',
             'sensirion-i2c-driver~=0.1.3',
-        ]
+        ],
+        'docs': [
+            'sphinx~=2.2.1',
+            'sphinx-rtd-theme~=0.4.3',
+        ],
     },
     classifiers=[
         'Intended Audience :: Developers',
