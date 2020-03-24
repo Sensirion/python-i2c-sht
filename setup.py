@@ -47,6 +47,8 @@ setup(
             'mock~=3.0.0',
             'pytest~=3.10.0',
             'pytest-cov~=2.6.0',
+            'sensirion-shdlc-sensorbridge~=0.1.1',
+            'sensirion-i2c-driver~=0.1.3',
         ]
     },
     classifiers=[
