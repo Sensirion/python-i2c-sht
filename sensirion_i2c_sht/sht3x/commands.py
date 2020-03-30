@@ -46,7 +46,55 @@ class Sht3xI2cCmdBase(SensirionWordI2cCommand):
         )
 
 
-class Sht3xI2cCmdMeasHighRes(Sht3xI2cCmdBase):
+class Sht3xI2cCmdMeasBase(Sht3xI2cCmdBase):
+    """
+    Base SHT3x command for a single shot measurement with clock stretching
+    disabled.
+    """
+    def __init__(self, command, read_delay):
+        """
+        Constructs a new command.
+
+        :param int/None command:
+            The command word to be sent to the device. None means that no
+            command will be sent, i.e. only ``tx_words`` (if not None) will
+            be sent.
+        :param float read_delay:
+            Delay (in Seconds) to be inserted between the end of the write
+            operation and the beginning of the read operation. This is needed
+            if the device needs some time to prepare the RX data, e.g. if it
+            has to perform a measurement. Set to 0.0 to indicate that no delay
+            is needed, i.e. the device does not need any processing time.
+        """
+        super(Sht3xI2cCmdMeasBase, self).__init__(
+            command=command,
+            tx_words=[],
+            rx_length=6,
+            read_delay=read_delay,
+            timeout=0.,
+        )
+
+    def interpret_response(self, data):
+        """
+        Converts the raw response from the device to the proper data type.
+
+        :param bytes data:
+            Received raw bytes from the read operation.
+        :return:
+            The measured temperature and humidity.
+
+            - temperature (:py:class:`~sensirion_i2c_sht.sht3x.types.Temperature`) -
+              Temperature response object.
+            - humidity (:py:class:`~sensirion_i2c_sht.sht3x.types.Humidity`) -
+              Humidity response object.
+        :rtype:
+            tuple
+        """  # noqa: E501
+        words = SensirionWordI2cCommand.interpret_response(self, data)
+        return Temperature(words[0]), Humidity(words[1])
+
+
+class Sht3xI2cCmdMeasHighRes(Sht3xI2cCmdMeasBase):
     """
     SHT3x command for a single shot measurement with high repeatability and
     clock stretching disabled.
@@ -57,33 +105,11 @@ class Sht3xI2cCmdMeasHighRes(Sht3xI2cCmdBase):
         """
         super(Sht3xI2cCmdMeasHighRes, self).__init__(
             command=0x2400,
-            tx_words=[],
-            rx_length=6,
             read_delay=0.02,
-            timeout=0.,
         )
 
-    def interpret_response(self, data):
-        """
-        Converts the raw response from the device to the proper data type.
 
-        :param bytes data:
-            Received raw bytes from the read operation.
-        :return:
-            The measured temperature and humidity.
-
-            - temperature (:py:class:`~sensirion_i2c_sht.sht3x.types.Temperature`) -
-              Temperature response object.
-            - humidity (:py:class:`~sensirion_i2c_sht.sht3x.types.Humidity`) -
-              Humidity response object.
-        :rtype:
-            tuple
-        """  # noqa: E501
-        words = SensirionWordI2cCommand.interpret_response(self, data)
-        return Temperature(words[0]), Humidity(words[1])
-
-
-class Sht3xI2cCmdMeasMediumRes(Sht3xI2cCmdBase):
+class Sht3xI2cCmdMeasMediumRes(Sht3xI2cCmdMeasBase):
     """
     SHT3x command for a single shot measurement with medium repeatability and
     clock stretching disabled.
@@ -94,33 +120,11 @@ class Sht3xI2cCmdMeasMediumRes(Sht3xI2cCmdBase):
         """
         super(Sht3xI2cCmdMeasMediumRes, self).__init__(
             command=0x240B,
-            tx_words=[],
-            rx_length=6,
             read_delay=0.01,
-            timeout=0.,
         )
 
-    def interpret_response(self, data):
-        """
-        Converts the raw response from the device to the proper data type.
 
-        :param bytes data:
-            Received raw bytes from the read operation.
-        :return:
-            The measured temperature and humidity.
-
-            - temperature (:py:class:`~sensirion_i2c_sht.sht3x.types.Temperature`) -
-              Temperature response object.
-            - humidity (:py:class:`~sensirion_i2c_sht.sht3x.types.Humidity`) -
-              Humidity response object.
-        :rtype:
-            tuple
-        """  # noqa: E501
-        words = SensirionWordI2cCommand.interpret_response(self, data)
-        return Temperature(words[0]), Humidity(words[1])
-
-
-class Sht3xI2cCmdMeasLowRes(Sht3xI2cCmdBase):
+class Sht3xI2cCmdMeasLowRes(Sht3xI2cCmdMeasBase):
     """
     SHT3x command for a single shot measurement with low repeatability and
     clock stretching disabled.
@@ -131,30 +135,8 @@ class Sht3xI2cCmdMeasLowRes(Sht3xI2cCmdBase):
         """
         super(Sht3xI2cCmdMeasLowRes, self).__init__(
             command=0x2416,
-            tx_words=[],
-            rx_length=6,
             read_delay=0.005,
-            timeout=0.,
         )
-
-    def interpret_response(self, data):
-        """
-        Converts the raw response from the device to the proper data type.
-
-        :param bytes data:
-            Received raw bytes from the read operation.
-        :return:
-            The measured temperature and humidity.
-
-            - temperature (:py:class:`~sensirion_i2c_sht.sht3x.types.Temperature`) -
-              Temperature response object.
-            - humidity (:py:class:`~sensirion_i2c_sht.sht3x.types.Humidity`) -
-              Humidity response object.
-        :rtype:
-            tuple
-        """  # noqa: E501
-        words = SensirionWordI2cCommand.interpret_response(self, data)
-        return Temperature(words[0]), Humidity(words[1])
 
 
 class Sht3xI2cCmdHeaterOn(Sht3xI2cCmdBase):
