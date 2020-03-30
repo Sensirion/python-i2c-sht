@@ -40,6 +40,7 @@ setup(
     ],
     install_requires=[
         'sensirion-i2c-driver~=0.1.0',
+        'enum34;python_version<"3.4"',
     ],
     extras_require={
         'test': [

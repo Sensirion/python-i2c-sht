@@ -2,7 +2,8 @@
 # (c) Copyright 2020 Sensirion AG, Switzerland
 
 from __future__ import absolute_import, division, print_function
-from sensirion_i2c_sht.sht3x.types import Temperature, Humidity, StatusRegister
+from sensirion_i2c_sht.sht3x.types import Temperature, Humidity, \
+    StatusRegister, Repeatability
 import pytest
 
 
@@ -28,9 +29,9 @@ def sht3x_with_cmd_status_check(sht3x):
 @pytest.mark.needs_device
 @pytest.mark.needs_sht3x
 @pytest.mark.parametrize("repeatability", [
-    'high',
-    'medium',
-    'low',
+    Repeatability.HIGH,
+    Repeatability.MEDIUM,
+    Repeatability.LOW,
 ])
 def test_single_shot_measurement(sht3x_with_cmd_status_check, repeatability):
     """

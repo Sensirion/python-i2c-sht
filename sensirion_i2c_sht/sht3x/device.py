@@ -7,6 +7,7 @@ from .commands import Sht3xI2cCmdMeasHighRes, Sht3xI2cCmdMeasMediumRes, \
     Sht3xI2cCmdMeasLowRes, Sht3xI2cCmdHeaterOn, Sht3xI2cCmdHeaterOff, \
     Sht3xI2cCmdReadStatusRegister, Sht3xI2cCmdResetStatusRegister, \
     Sht3xI2cCmdSoftReset
+from .types import Repeatability
 
 
 class Sht3xI2cDevice(I2cDevice):
@@ -25,13 +26,14 @@ class Sht3xI2cDevice(I2cDevice):
         """
         super(Sht3xI2cDevice, self).__init__(connection, slave_address)
 
-    def single_shot_measurement(self, repeatability='high'):
+    def single_shot_measurement(self, repeatability=Repeatability.HIGH):
         """
         Trigger a measurement and read the temperature and humidity.
 
-        :param str repeatability:
-            Configure the desired repeatability. Available option are
-            'high', 'medium' and 'low'.
+        :param `~sensirion_i2c_sht.sht3x.types.Repeatability` repeatability:
+            Configure the repeatability setting.
+        :raises ValueError:
+            If the passed repeatability is not valid.
         :return:
             The measured temperature and humidity.
 
@@ -42,11 +44,11 @@ class Sht3xI2cDevice(I2cDevice):
         :rtype:
             tuple
         """  # noqa: E501
-        if repeatability.lower() == 'high':
+        if repeatability == Repeatability.HIGH:
             result = self.execute(Sht3xI2cCmdMeasHighRes())
-        elif repeatability.lower() == 'medium':
+        elif repeatability == Repeatability.MEDIUM:
             result = self.execute(Sht3xI2cCmdMeasMediumRes())
-        elif repeatability.lower() == 'low':
+        elif repeatability == Repeatability.LOW:
             result = self.execute(Sht3xI2cCmdMeasLowRes())
         else:
             raise ValueError('Unknown argument for repeatability.')

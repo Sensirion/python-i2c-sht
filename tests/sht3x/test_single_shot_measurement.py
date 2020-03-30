@@ -13,4 +13,4 @@ def test_invalid_config(sht3x):
     inputs.
     """
     with pytest.raises(ValueError):
-        sht3x.single_shot_measurement('not_valid')
+        sht3x.single_shot_measurement(repeatability='not_valid')
