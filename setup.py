@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright 2019 Sensirion AG, Switzerland
+# (c) Copyright 2020 Sensirion AG, Switzerland
 
 from __future__ import absolute_import, division, print_function
 from setuptools import setup, find_packages
@@ -40,6 +40,7 @@ setup(
     ],
     install_requires=[
         'sensirion-i2c-driver~=0.1.0',
+        'enum34;python_version<"3.4"',
     ],
     extras_require={
         'test': [
@@ -47,7 +48,13 @@ setup(
             'mock~=3.0.0',
             'pytest~=3.10.0',
             'pytest-cov~=2.6.0',
-        ]
+            'sensirion-shdlc-sensorbridge~=0.1.1',
+            'sensirion-i2c-driver~=0.1.3',
+        ],
+        'docs': [
+            'sphinx~=2.2.1',
+            'sphinx-rtd-theme~=0.4.3',
+        ],
     },
     classifiers=[
         'Intended Audience :: Developers',
