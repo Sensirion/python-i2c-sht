@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_i2c_sht.sht3x.commands &mdash; sensirion-i2c-sht 0.2.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> sensirion-i2c-sht
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">sensirion-i2c-sht</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_i2c_sht.sht3x.commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_i2c_sht.sht3x.commands</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2020 Sensirion AG, Switzerland</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">sensirion_i2c_driver</span> <span class="kn">import</span> <span class="n">SensirionI2cCommand</span><span class="p">,</span> <span class="n">CrcCalculator</span>
+<span class="kn">from</span> <span class="nn">.response_types</span> <span class="kn">import</span> <span class="n">Sht3xTemperature</span><span class="p">,</span> <span class="n">Sht3xHumidity</span><span class="p">,</span> \
+    <span class="n">Sht3xStatusRegister</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdBase"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdBase</span><span class="p">(</span><span class="n">SensirionI2cCommand</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x I²C base command.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">tx_data</span><span class="p">,</span> <span class="n">rx_length</span><span class="p">,</span> <span class="n">read_delay</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span>
+                 <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new SHT3x I²C command.</span>
+
+<span class="sd">        :param int/None command:</span>
+<span class="sd">            The command ID to be sent to the device. None means that no</span>
+<span class="sd">            command will be sent, i.e. only ``tx_data`` (if not None) will</span>
+<span class="sd">            be sent. No CRC is added to these bytes since the command ID</span>
+<span class="sd">            usually already contains a CRC.</span>
+<span class="sd">        :param bytes-like/list/None tx_data:</span>
+<span class="sd">            Bytes to be extended with CRCs and then sent to the I²C device.</span>
+<span class="sd">            None means that no write header will be sent at all (if ``command``</span>
+<span class="sd">            is None too). An empty list means to send the write header (even if</span>
+<span class="sd">            ``command`` is None), but without data following it.</span>
+<span class="sd">        :param int/None rx_length:</span>
+<span class="sd">            Number of bytes to be read from the I²C device, including CRC</span>
+<span class="sd">            bytes. None means that no read header is sent at all. Zero means</span>
+<span class="sd">            to send the read header, but without reading any data.</span>
+<span class="sd">        :param float read_delay:</span>
+<span class="sd">            Delay (in Seconds) to be inserted between the end of the write</span>
+<span class="sd">            operation and the beginning of the read operation. This is needed</span>
+<span class="sd">            if the device needs some time to prepare the RX data, e.g. if it</span>
+<span class="sd">            has to perform a measurement. Set to 0.0 to indicate that no delay</span>
+<span class="sd">            is needed, i.e. the device does not need any processing time.</span>
+<span class="sd">        :param float timeout:</span>
+<span class="sd">            Timeout (in Seconds) to be used in case of clock stretching. If the</span>
+<span class="sd">            device stretches the clock longer than this value, the transceive</span>
+<span class="sd">            operation will be aborted with a timeout error. Set to 0.0 to</span>
+<span class="sd">            indicate that the device will not stretch the clock for this</span>
+<span class="sd">            command.</span>
+<span class="sd">        :param float post_processing_time:</span>
+<span class="sd">            Maximum time in seconds the device needs for post processing of</span>
+<span class="sd">            this command until it is ready to receive the next command. For</span>
+<span class="sd">            example after a device reset command, the device might need some</span>
+<span class="sd">            time until it is ready again. Usually this is 0.0s, i.e. no post</span>
+<span class="sd">            processing is needed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="n">command</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="n">tx_data</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="n">rx_length</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="n">read_delay</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">crc</span><span class="o">=</span><span class="n">CrcCalculator</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">),</span>
+            <span class="n">command_bytes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="n">post_processing_time</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdMeasBase"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasBase">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdMeasBase</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base SHT3x command for a single shot measurement with clock stretching</span>
+<span class="sd">    disabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdMeasBase.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasBase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">read_delay</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+
+<span class="sd">        :param int/None command:</span>
+<span class="sd">            The command word to be sent to the device. None means that no</span>
+<span class="sd">            command will be sent, i.e. only ``tx_words`` (if not None) will</span>
+<span class="sd">            be sent.</span>
+<span class="sd">        :param float read_delay:</span>
+<span class="sd">            Delay (in Seconds) to be inserted between the end of the write</span>
+<span class="sd">            operation and the beginning of the read operation. This is needed</span>
+<span class="sd">            if the device needs some time to prepare the RX data, e.g. if it</span>
+<span class="sd">            has to perform a measurement. Set to 0.0 to indicate that no delay</span>
+<span class="sd">            is needed, i.e. the device does not need any processing time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="n">command</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="n">read_delay</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sht3xI2cCmdMeasBase.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasBase.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the raw response from the device to the proper data type.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The measured temperature and humidity.</span>
+
+<span class="sd">            - temperature (:py:class:`~sensirion_i2c_sht.sht3x.response_types.Sht3xTemperature`) -</span>
+<span class="sd">              Temperature response object.</span>
+<span class="sd">            - humidity (:py:class:`~sensirion_i2c_sht.sht3x.response_types.Sht3xHumidity`) -</span>
+<span class="sd">              Humidity response object.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">SensirionI2cCommand</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">temperature_ticks</span><span class="p">,</span> <span class="n">humidity_ticks</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;2H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sht3xTemperature</span><span class="p">(</span><span class="n">temperature_ticks</span><span class="p">),</span> \
+            <span class="n">Sht3xHumidity</span><span class="p">(</span><span class="n">humidity_ticks</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdMeasHighRes"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasHighRes">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdMeasHighRes</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command for a single shot measurement with high repeatability and</span>
+<span class="sd">    clock stretching disabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdMeasHighRes.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasHighRes.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasHighRes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x2400</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdMeasMediumRes"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasMediumRes">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdMeasMediumRes</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command for a single shot measurement with medium repeatability and</span>
+<span class="sd">    clock stretching disabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdMeasMediumRes.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasMediumRes.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasMediumRes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x240B</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdMeasLowRes"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasLowRes">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdMeasLowRes</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command for a single shot measurement with low repeatability and</span>
+<span class="sd">    clock stretching disabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdMeasLowRes.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasLowRes.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdMeasLowRes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x2416</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdHeaterOn"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOn">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdHeaterOn</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command to enable the internal heater.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdHeaterOn.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOn.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdHeaterOn</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x306D</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdHeaterOff"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdHeaterOff</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command to disable the internal heater.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdHeaterOff.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdHeaterOff</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x3066</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdSoftReset"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdSoftReset">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdSoftReset</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command for a soft reset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdSoftReset.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdSoftReset.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdSoftReset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x30A2</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdReadStatusRegister"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadStatusRegister">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdReadStatusRegister</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command to read the status register.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdReadStatusRegister.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadStatusRegister.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdReadStatusRegister</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xF32D</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sht3xI2cCmdReadStatusRegister.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadStatusRegister.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the raw response from the device to the proper data type.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: The status register.</span>
+<span class="sd">        :rtype: :py:class:`~sensirion_i2c_sht.sht3x.response_types.Sht3xStatusRegister`</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">SensirionI2cCommand</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sht3xStatusRegister</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="Sht3xI2cCmdResetStatusRegister"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdResetStatusRegister">[docs]</a><span class="k">class</span> <span class="nc">Sht3xI2cCmdResetStatusRegister</span><span class="p">(</span><span class="n">Sht3xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SHT3x command to reset the status register.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sht3xI2cCmdResetStatusRegister.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdResetStatusRegister.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new command.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sht3xI2cCmdResetStatusRegister</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x3041</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/_modules/sensirion_i2c_sht/sht3x/commands.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
