@@ -6,7 +6,7 @@ from sensirion_i2c_driver import I2cDevice
 from .commands import Sht3xI2cCmdMeasHighRes, Sht3xI2cCmdMeasMediumRes, \
     Sht3xI2cCmdMeasLowRes, Sht3xI2cCmdHeaterOn, Sht3xI2cCmdHeaterOff, \
     Sht3xI2cCmdReadStatusRegister, Sht3xI2cCmdResetStatusRegister, \
-    Sht3xI2cCmdSoftReset
+    Sht3xI2cCmdSoftReset, Sht3xI2cCmdReadSerial
 from .data_types import Sht3xRepeatability
 
 
@@ -88,3 +88,12 @@ class Sht3xI2cDevice(I2cDevice):
         system into a well-defined state without removing the power supply.
         """
         return self.execute(Sht3xI2cCmdSoftReset())
+
+    def read_serial_number(self):
+        """
+        Read the serial number from the device.
+
+        :return: The serial number.
+        :rtype: int
+        """
+        return self.execute(Sht3xI2cCmdReadSerial())
