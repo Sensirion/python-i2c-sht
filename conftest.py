@@ -6,6 +6,7 @@ from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection
 from sensirion_shdlc_sensorbridge import SensorBridgePort, \
     SensorBridgeShdlcDevice, SensorBridgeI2cProxy
 from sensirion_i2c_driver import I2cConnection
+from sensirion_i2c_sht.sht2x import Sht2xI2cDevice
 from sensirion_i2c_sht.sht3x import Sht3xI2cDevice
 import pytest
 
@@ -55,6 +56,23 @@ def bridge(request):
     with ShdlcSerialPort(serial_port, serial_bitrate) as port:
         dev = SensorBridgeShdlcDevice(ShdlcConnection(port), slave_address=0)
         yield dev
+
+
+@pytest.fixture
+def sht2x(bridge):
+    # Configure SensorBridge port 1 for SHT2x
+    bridge.set_i2c_frequency(SensorBridgePort.ONE, frequency=100e3)
+    bridge.set_supply_voltage(SensorBridgePort.ONE, voltage=3.3)
+    bridge.switch_supply_on(SensorBridgePort.ONE)
+
+    # Create SHT2x device
+    i2c_transceiver = SensorBridgeI2cProxy(bridge, port=SensorBridgePort.ONE)
+    sht2x = Sht2xI2cDevice(I2cConnection(i2c_transceiver))
+
+    yield sht2x
+
+    # make sure the channel is powered off after executing tests
+    bridge.switch_supply_off(SensorBridgePort.ONE)
 
 
 @pytest.fixture

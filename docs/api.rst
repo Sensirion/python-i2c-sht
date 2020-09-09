@@ -1,6 +1,27 @@
 API Reference
 =============
 
+SHT2x
+-----
+
+
+Sht2xI2cDevice
+~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.sht2x.device
+
+
+Sht2xI2cCommand
+~~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.sht2x.commands
+
+
+Response Types
+~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.sht2x.response_types
+
 
 SHT3x
 -----
