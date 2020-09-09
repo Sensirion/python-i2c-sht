@@ -205,6 +205,7 @@ class Sht3xI2cCmdSoftReset(Sht3xI2cCmdBase):
             rx_length=None,
             read_delay=0.,
             timeout=0.,
+            post_processing_time=0.002,
         )
 
 
@@ -252,3 +253,33 @@ class Sht3xI2cCmdResetStatusRegister(Sht3xI2cCmdBase):
             read_delay=0.,
             timeout=0.,
         )
+
+
+class Sht3xI2cCmdReadSerial(Sht3xI2cCmdBase):
+    """
+    SHT3x command to read the serial number.
+    """
+    def __init__(self):
+        """
+        Constructs a new command.
+        """
+        super(Sht3xI2cCmdReadSerial, self).__init__(
+            command=0x3780,
+            tx_data=b'',
+            rx_length=6,
+            read_delay=0,
+            timeout=0,
+        )
+
+    def interpret_response(self, data):
+        """
+        Converts the raw response from the device to the proper data type.
+
+        :param bytes data:
+            Received raw bytes from the read operation.
+        :return: The serial number.
+        :rtype: int
+        """
+        checked_data = Sht3xI2cCmdBase.interpret_response(self, data)
+        words = unpack(">2H", checked_data)
+        return words[0] * 65536 + words[1]

@@ -100,3 +100,14 @@ def test_soft_reset(sht3x_with_cmd_status_check):
     """
     result = sht3x_with_cmd_status_check.soft_reset()
     assert result is None
+
+
+@pytest.mark.needs_device
+@pytest.mark.needs_sht3x
+def test_read_serial_number(sht3x_with_cmd_status_check):
+    """
+    Test if the command is accepted by the device and returns the proper
+    result.
+    """
+    result = sht3x_with_cmd_status_check.read_serial_number()
+    assert type(result) is int
