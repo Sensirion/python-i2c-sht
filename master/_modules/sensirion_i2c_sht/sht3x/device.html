@@ -161,7 +161,7 @@
 <span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> <span class="n">Sht3xI2cCmdMeasHighRes</span><span class="p">,</span> <span class="n">Sht3xI2cCmdMeasMediumRes</span><span class="p">,</span> \
     <span class="n">Sht3xI2cCmdMeasLowRes</span><span class="p">,</span> <span class="n">Sht3xI2cCmdHeaterOn</span><span class="p">,</span> <span class="n">Sht3xI2cCmdHeaterOff</span><span class="p">,</span> \
     <span class="n">Sht3xI2cCmdReadStatusRegister</span><span class="p">,</span> <span class="n">Sht3xI2cCmdResetStatusRegister</span><span class="p">,</span> \
-    <span class="n">Sht3xI2cCmdSoftReset</span>
+    <span class="n">Sht3xI2cCmdSoftReset</span><span class="p">,</span> <span class="n">Sht3xI2cCmdReadSerial</span>
 <span class="kn">from</span> <span class="nn">.data_types</span> <span class="kn">import</span> <span class="n">Sht3xRepeatability</span>
 
 
@@ -242,7 +242,16 @@
 <span class="sd">        Perform a soft reset for the device. This can be used to force the</span>
 <span class="sd">        system into a well-defined state without removing the power supply.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sht3xI2cCmdSoftReset</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sht3xI2cCmdSoftReset</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sht3xI2cDevice.read_serial_number"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.read_serial_number">[docs]</a>    <span class="k">def</span> <span class="nf">read_serial_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the serial number from the device.</span>
+
+<span class="sd">        :return: The serial number.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sht3xI2cCmdReadSerial</span><span class="p">())</span></div></div>
 </pre></div>
 
            </div>

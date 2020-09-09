@@ -716,6 +716,22 @@ register can be cleared (set to zero).</p>
 system into a well-defined state without removing the power supply.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.read_serial_number">
+<code class="descname">read_serial_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/device.html#Sht3xI2cDevice.read_serial_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.read_serial_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the serial number from the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The serial number.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.connection">
 <code class="descname">connection</code><a class="headerlink" href="#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.connection" title="Permalink to this definition">¶</a></dt>
@@ -1161,6 +1177,36 @@ the data with all CRCs removed.</p>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sht3x.commands.</code><code class="descname">Sht3xI2cCmdReadSerial</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/commands.html#Sht3xI2cCmdReadSerial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHT3x command to read the serial number.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/commands.html#Sht3xI2cCmdReadSerial.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/commands.html#Sht3xI2cCmdReadSerial.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdReadSerial.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The serial number.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
