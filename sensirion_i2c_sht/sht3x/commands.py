@@ -205,6 +205,7 @@ class Sht3xI2cCmdSoftReset(Sht3xI2cCmdBase):
             rx_length=None,
             read_delay=0.,
             timeout=0.,
+            post_processing_time=0.002,
         )
 
 
