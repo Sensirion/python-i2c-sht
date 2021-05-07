@@ -1,5 +1,9 @@
 CHANGELOG
 ---------
+0.2.2
+:::::
+- Add ``Sht4xI2cDevice``
+
 0.2.1
 :::::
 - Add ``Sht2xI2cDevice``
