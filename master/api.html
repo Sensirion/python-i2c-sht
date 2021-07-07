@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Reference &mdash; sensirion-i2c-sht 0.2.2 documentation</title>
+  <title>API Reference &mdash; sensirion-i2c-sht 0.2.3 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
             
           
@@ -109,6 +109,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sht4x.commands">Sht4xI2cCommand</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Data Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Response Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sts4x">STS4x</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sts4x.device">Sts4xI2cDevice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sts4x.commands">Sts4xI2cCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Response Types</a></li>
 </ul>
 </li>
 </ul>
@@ -2258,6 +2265,489 @@ available.</p>
 <dt id="sensirion_i2c_sht.sht4x.response_types.Sht4xHumidity.percent_rh">
 <code class="descname">percent_rh</code><a class="headerlink" href="#sensirion_i2c_sht.sht4x.response_types.Sht4xHumidity.percent_rh" title="Permalink to this definition">¶</a></dt>
 <dd><p>The converted humidity in %RH.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="sts4x">
+<h2>STS4x<a class="headerlink" href="#sts4x" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sensirion_i2c_sht.sts4x.device">
+<span id="sts4xi2cdevice"></span><h3>Sts4xI2cDevice<a class="headerlink" href="#module-sensirion_i2c_sht.sts4x.device" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.device.</code><code class="descname">Sts4xI2cDevice</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address=68</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/device.html#Sts4xI2cDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x I²C device class to allow executing I²C commands.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address=68</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/device.html#Sts4xI2cDevice.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new STS4x I²C device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>connection</strong> (<a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.connection.I2cConnection" title="(in Sensirion I²C Python Driver v1.0.1)"><em>I2cConnection</em></a>) – The I²C connection to use for communication.</li>
+<li><strong>slave_address</strong> (<em>byte</em>) – The I²C slave address, defaults to 0x44.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.single_shot_measurement">
+<code class="descname">single_shot_measurement</code><span class="sig-paren">(</span><em>repeatability=&lt;Sts4xRepeatability.HIGH: 1&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/device.html#Sts4xI2cDevice.single_shot_measurement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.single_shot_measurement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger a measurement and read the temperature.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>repeatability</strong> (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability" title="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability"><em>Sts4xRepeatability</em></a>) – Configure the repeatability setting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If the passed repeatability is not valid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature<ul class="simple">
+<li>temperature (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a>) -
+Temperature response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.soft_reset">
+<code class="descname">soft_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/device.html#Sts4xI2cDevice.soft_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.soft_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a soft reset for the device. This can be used to force the
+system into a well-defined state without removing the power supply.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.read_serial_number">
+<code class="descname">read_serial_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/device.html#Sts4xI2cDevice.read_serial_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.read_serial_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the serial number from the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The serial number.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.connection">
+<code class="descname">connection</code><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the used I²C connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The used I²C connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.connection.I2cConnection" title="(in Sensirion I²C Python Driver v1.0.1)">I2cConnection</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute an I²C command on this device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.command.I2cCommand" title="(in Sensirion I²C Python Driver v1.0.1)"><em>I2cCommand</em></a>) – The command to be executed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The interpreted response of the executed command.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Depends on the executed command.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.slave_address">
+<code class="descname">slave_address</code><a class="headerlink" href="#sensirion_i2c_sht.sts4x.device.Sts4xI2cDevice.slave_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the I²C slave address.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The I²C slave address.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sensirion_i2c_sht.sts4x.commands">
+<span id="sts4xi2ccommand"></span><h3>Sts4xI2cCommand<a class="headerlink" href="#module-sensirion_i2c_sht.sts4x.commands" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdBase</code><span class="sig-paren">(</span><em>command</em>, <em>tx_data</em>, <em>rx_length</em>, <em>read_delay</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x I²C base command.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>command</em>, <em>tx_data</em>, <em>rx_length</em>, <em>read_delay</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new STS4x I²C command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>command</strong> (<em>int/None</em>) – The command ID to be sent to the device. None means that no
+command will be sent, i.e. only <code class="docutils literal notranslate"><span class="pre">tx_data</span></code> (if not None) will
+be sent. No CRC is added to these bytes since the command ID
+usually already contains a CRC.</li>
+<li><strong>tx_data</strong> (<em>bytes-like/list/None</em>) – Bytes to be extended with CRCs and then sent to the I²C device.
+None means that no write header will be sent at all (if <code class="docutils literal notranslate"><span class="pre">command</span></code>
+is None too). An empty list means to send the write header (even if
+<code class="docutils literal notranslate"><span class="pre">command</span></code> is None), but without data following it.</li>
+<li><strong>rx_length</strong> (<em>int/None</em>) – Number of bytes to be read from the I²C device, including CRC
+bytes. None means that no read header is sent at all. Zero means
+to send the read header, but without reading any data.</li>
+<li><strong>read_delay</strong> (<em>float</em>) – Delay (in Seconds) to be inserted between the end of the write
+operation and the beginning of the read operation. This is needed
+if the device needs some time to prepare the RX data, e.g. if it
+has to perform a measurement. Set to 0.0 to indicate that no delay
+is needed, i.e. the device does not need any processing time.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device needs for post processing of
+this command until it is ready to receive the next command. For
+example after a device reset command, the device might need some
+time until it is ready again. Usually this is 0.0s, i.e. no post
+processing is needed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdBase.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdMeasBase</code><span class="sig-paren">(</span><em>command</em>, <em>read_delay</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base STS4x command for a single shot measurement.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>command</em>, <em>read_delay</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>command</strong> (<em>int/None</em>) – The command word to be sent to the device. None means that no
+command will be sent, i.e. only <code class="docutils literal notranslate"><span class="pre">tx_words</span></code> (if not None) will
+be sent.</li>
+<li><strong>read_delay</strong> (<em>float</em>) – Delay (in Seconds) to be inserted between the end of the write
+operation and the beginning of the read operation. This is needed
+if the device needs some time to prepare the RX data, e.g. if it
+has to perform a measurement. Set to 0.0 to indicate that no delay
+is needed, i.e. the device does not need any processing time.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasBase.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasBase.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature.<ul class="simple">
+<li>temperature (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a>) -
+Temperature response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdMeasHighRes</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasHighRes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x command for a single shot measurement with high repeatability.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasHighRes.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasHighRes.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature.<ul class="simple">
+<li>temperature (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a>) -
+Temperature response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdMeasMediumRes</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasMediumRes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x command for a single shot measurement with medium repeatability.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasMediumRes.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasMediumRes.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature.<ul class="simple">
+<li>temperature (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a>) -
+Temperature response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdMeasLowRes</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasLowRes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x command for a single shot measurement with low repeatability.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdMeasLowRes.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdMeasLowRes.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature.<ul class="simple">
+<li>temperature (<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a>) -
+Temperature response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sts4xTemperature</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdSoftReset</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdSoftReset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x command for a soft reset.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdSoftReset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdSoftReset.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.commands.</code><code class="descname">Sts4xI2cCmdReadSerial</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdReadSerial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial" title="Permalink to this definition">¶</a></dt>
+<dd><p>STS4x command to read the serial number.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdReadSerial.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/commands.html#Sts4xI2cCmdReadSerial.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.commands.Sts4xI2cCmdReadSerial.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the raw response from the device to the proper data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The serial number.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id4">
+<h3>Data Types<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-sensirion_i2c_sht.sts4x.data_types"></span><dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.data_types.</code><code class="descname">Sts4xRepeatability</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/data_types.html#Sts4xRepeatability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enum containing all available repeatability settings for the
+temperature measurement.</p>
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.HIGH">
+<code class="descname">HIGH</code><em class="property"> = 1</em><a class="headerlink" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.HIGH" title="Permalink to this definition">¶</a></dt>
+<dd><p>High repeatability</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.MEDIUM">
+<code class="descname">MEDIUM</code><em class="property"> = 2</em><a class="headerlink" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.MEDIUM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Medium repeatability</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.LOW">
+<code class="descname">LOW</code><em class="property"> = 3</em><a class="headerlink" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability.LOW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low repeatability</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id5">
+<h3>Response Types<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-sensirion_i2c_sht.sts4x.response_types"></span><dl class="class">
+<dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.response_types.</code><code class="descname">Sts4xTemperature</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/response_types.html#Sts4xTemperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a measurement response for the temperature.</p>
+<p>With the <a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.ticks" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.ticks"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ticks</span></code></a> you can access the raw data as received from the
+device. For the converted values you can choose between
+<a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_celsius" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_celsius"><code class="xref py py-attr docutils literal notranslate"><span class="pre">degrees_celsius</span></code></a> and <a class="reference internal" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_fahrenheit" title="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_fahrenheit"><code class="xref py py-attr docutils literal notranslate"><span class="pre">degrees_fahrenheit</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ticks</strong> (<em>int</em>) – The read ticks as received from the device.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/response_types.html#Sts4xTemperature.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an instance from the received raw data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.ticks">
+<code class="descname">ticks</code><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.ticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ticks (int) as received from the device.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_celsius">
+<code class="descname">degrees_celsius</code><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_celsius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The converted temperature in °C.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_fahrenheit">
+<code class="descname">degrees_fahrenheit</code><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature.degrees_fahrenheit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The converted temperature in °F.</p>
 </dd></dl>
 
 </dd></dl>
