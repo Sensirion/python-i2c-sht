@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Reference &mdash; sensirion-i2c-sht 0.2.3 documentation</title>
+  <title>API Reference &mdash; sensirion-i2c-sht 0.3.0 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.2.3
+                0.3.0
               </div>
             
           
@@ -104,18 +104,25 @@
 <li class="toctree-l3"><a class="reference internal" href="#id1">Response Types</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#shtc3">SHTC3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.shtc3.device">Shtc3I2cDevice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.shtc3.commands">Shtc3I2cCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Response Types</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#sht4x">SHT4x</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sht4x.device">Sht4xI2cDevice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sht4x.commands">Sht4xI2cCommand</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Data Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Response Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Response Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#sts4x">STS4x</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sts4x.device">Sts4xI2cDevice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-sensirion_i2c_sht.sts4x.commands">Sts4xI2cCommand</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Data Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Response Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Response Types</a></li>
 </ul>
 </li>
 </ul>
@@ -1427,6 +1434,678 @@ the integrated command checksum</li>
 
 </div>
 </div>
+<div class="section" id="shtc3">
+<h2>SHTC3<a class="headerlink" href="#shtc3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sensirion_i2c_sht.shtc3.device">
+<span id="shtc3i2cdevice"></span><h3>Shtc3I2cDevice<a class="headerlink" href="#module-sensirion_i2c_sht.shtc3.device" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.device.</code><code class="descname">Shtc3I2cDevice</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address=112</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHTC3 I²C device class to allow executing I²C commands.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>connection</em>, <em>slave_address=112</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new SHTC3 I²C device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>connection</strong> (<a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.connection.I2cConnection" title="(in Sensirion I²C Python Driver v1.0.1)"><em>I2cConnection</em></a>) – The I²C connection to use for communication.</li>
+<li><strong>slave_address</strong> (<em>byte</em>) – The I²C slave address, defaults to 0x70.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.measure">
+<code class="descname">measure</code><span class="sig-paren">(</span><em>power_mode=&lt;Shtc3PowerMode.NORMAL: 2&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger a measurement with clock stretching disabled and read the temperature and humidity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power_mode</strong> (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode" title="sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode"><em>Shtc3PowerMode</em></a>) – Configure the power mode setting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If the passed power mode is not valid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature and humidity.<ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.measure_clock_stretching">
+<code class="descname">measure_clock_stretching</code><span class="sig-paren">(</span><em>power_mode=&lt;Shtc3PowerMode.NORMAL: 2&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.measure_clock_stretching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.measure_clock_stretching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger a measurement with clock stretching enabled and read the temperature and humidity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power_mode</strong> (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode" title="sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode"><em>Shtc3PowerMode</em></a>) – Configure the power mode setting.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If the passed power mode is not valid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The measured temperature and humidity.<ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.read_product_id">
+<code class="descname">read_product_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.read_product_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.read_product_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the product id from the device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The product id.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.wake_up">
+<code class="descname">wake_up</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.wake_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.wake_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>wake up SHTC3.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When the sensor is in sleep mode, it requires the
+wake-up command before any further communication</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.enter_sleep">
+<code class="descname">enter_sleep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.enter_sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.enter_sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sleep command of the sensor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Upon VDD reaching the power-up voltage level V_POR , the SHTC3
+enters the idle state after a duration of 240us. After that,
+the sensor should be set to sleep.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.soft_reset">
+<code class="descname">soft_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/device.html#Shtc3I2cDevice.soft_reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.soft_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a soft reset for the device. This can be used to force the
+system into a well-defined state without removing the power supply.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.connection">
+<code class="descname">connection</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the used I²C connection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The used I²C connection.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.connection.I2cConnection" title="(in Sensirion I²C Python Driver v1.0.1)">I2cConnection</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute an I²C command on this device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>command</strong> (<a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.command.I2cCommand" title="(in Sensirion I²C Python Driver v1.0.1)"><em>I2cCommand</em></a>) – The command to be executed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The interpreted response of the executed command.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Depends on the executed command.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.slave_address">
+<code class="descname">slave_address</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.device.Shtc3I2cDevice.slave_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the I²C slave address.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The I²C slave address.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">byte</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sensirion_i2c_sht.shtc3.commands">
+<span id="shtc3i2ccommand"></span><h3>Shtc3I2cCommand<a class="headerlink" href="#module-sensirion_i2c_sht.shtc3.commands" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdBase</code><span class="sig-paren">(</span><em>command</em>, <em>tx_data</em>, <em>rx_length</em>, <em>read_delay</em>, <em>timeout</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>shtc3 I²C base command.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>command</em>, <em>tx_data</em>, <em>rx_length</em>, <em>read_delay</em>, <em>timeout</em>, <em>post_processing_time=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new shtc3 I²C command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>command</strong> (<em>int/None</em>) – The command ID to be sent to the device. None means that no
+command will be sent, i.e. only <code class="docutils literal notranslate"><span class="pre">tx_data</span></code> (if not None) will
+be sent. No CRC is added to these bytes since the command ID
+usually already contains a CRC.</li>
+<li><strong>tx_data</strong> (<em>bytes-like/list/None</em>) – Bytes to be extended with CRCs and then sent to the I²C device.
+None means that no write header will be sent at all (if <code class="docutils literal notranslate"><span class="pre">command</span></code>
+is None too). An empty list means to send the write header (even if
+<code class="docutils literal notranslate"><span class="pre">command</span></code> is None), but without data following it.</li>
+<li><strong>rx_length</strong> (<em>int/None</em>) – Number of bytes to be read from the I²C device, including CRC
+bytes. None means that no read header is sent at all. Zero means
+to send the read header, but without reading any data.</li>
+<li><strong>read_delay</strong> (<em>float</em>) – Delay (in Seconds) to be inserted between the end of the write
+operation and the beginning of the read operation. This is needed
+if the device needs some time to prepare the RX data, e.g. if it
+has to perform a measurement. Set to 0.0 to indicate that no delay
+is needed, i.e. the device does not need any processing time.</li>
+<li><strong>timeout</strong> (<em>float</em>) – Timeout (in Seconds) to be used in case of clock stretching. If the
+device stretches the clock longer than this value, the transceive
+operation will be aborted with a timeout error. Set to 0.0 to
+indicate that the device will not stretch the clock for this
+command.</li>
+<li><strong>post_processing_time</strong> (<em>float</em>) – Maximum time in seconds the device needs for post processing of
+this command until it is ready to receive the next command. For
+example after a device reset command, the device might need some
+time until it is ready again. Usually this is 0.0s, i.e. no post
+processing is needed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdBase.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdMeasureNormalModeTicksClockStretching</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicksClockStretching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure Normal Mode Ticks Clock Stretching I²C Command</p>
+<p>Measure in normal mode with clock stretching enabled.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicksClockStretching.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicksClockStretching.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicksClockStretching.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the interpreted data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure Lowest Power Mode Ticks Clock Stretching I²C Command</p>
+<p>Measure in low power mode with clock stretching enabled.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicksClockStretching.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the interpreted data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdMeasureNormalModeTicks</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure Normal Mode Ticks I²C Command</p>
+<p>Measure in normal mode with clock stretching disabled.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicks.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureNormalModeTicks.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureNormalModeTicks.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the interpreted data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdMeasureLowestPowerModeTicks</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure Lowest Power Mode Ticks I²C Command</p>
+<p>Measure in low power mode with clock stretching disabled.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicks.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdMeasureLowestPowerModeTicks.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdMeasureLowestPowerModeTicks.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the interpreted data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>temperature (<code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3xTemperature</span></code>) -
+Temperature response object.</li>
+<li>humidity (<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shtc3Humidity</span></code></a>) -
+Humidity response object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdProductId</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdProductId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Product Id I²C Command</p>
+<p>Read out the product id.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The SHTC3 has an ID register which contains an SHTC3- specific
+product code. The read-out of the ID register can be used to
+verify the presence of the sensor and proper communication.</p>
+</div>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdProductId.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdProductId.interpret_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdProductId.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the interpreted data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">SHTC3-specific product code</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdSoftReset</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdSoftReset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Soft Reset I²C Command</p>
+<p>Perform a soft reset. reset all internal state machines and reload
+calibration data from the memory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A reset of the sensor can be achieved in three ways: • Soft
+reset: use this function • I2C general call: all devices on the
+I2C bus are reset by sending the command 0x06 to the I2C address
+0x00. • Power down (incl.pulling SCL and SDA low)</p>
+</div>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdSoftReset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSoftReset.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdWakeUp</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdWakeUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wake Up I²C Command</p>
+<p>Wake-up command of the sensor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When the sensor is in sleep mode, it requires the
+wake-up command before any further communication</p>
+</div>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdWakeUp.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdWakeUp.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.commands.</code><code class="descname">Shtc3I2cCmdSleep</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdSleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sleep I²C Command</p>
+<p>Sleep command of the sensor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Upon VDD reaching the power-up voltage level V_POR , the SHTC3
+enters the idle state after a duration of 240us. After that,
+the sensor should be set to sleep.</p>
+</div>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/commands.html#Shtc3I2cCmdSleep.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.shtc3.commands.Shtc3I2cCmdSleep.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>Data Types<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-sensirion_i2c_sht.shtc3.data_types"></span><dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.data_types.</code><code class="descname">Shtc3PowerMode</code><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/data_types.html#Shtc3PowerMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enum containing all available power mode settings for the
+temperature and humidity measurement.</p>
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode.LOW">
+<code class="descname">LOW</code><em class="property"> = 1</em><a class="headerlink" href="#sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode.LOW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low power mode</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode.NORMAL">
+<code class="descname">NORMAL</code><em class="property"> = 2</em><a class="headerlink" href="#sensirion_i2c_sht.shtc3.data_types.Shtc3PowerMode.NORMAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normal power mode</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id3">
+<h3>Response Types<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-sensirion_i2c_sht.shtc3.response_types"></span><dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.response_types.</code><code class="descname">Shtc3Temperature</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/response_types.html#Shtc3Temperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a measurement response for the temperature.</p>
+<p>With the <a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.ticks" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.ticks"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ticks</span></code></a> you can access the raw data as received from the
+device. For the converted values you can choose between
+<a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_celsius" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_celsius"><code class="xref py py-attr docutils literal notranslate"><span class="pre">degrees_celsius</span></code></a> and <a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_fahrenheit" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_fahrenheit"><code class="xref py py-attr docutils literal notranslate"><span class="pre">degrees_fahrenheit</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ticks</strong> (<em>int</em>) – The read ticks as received from the device.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/response_types.html#Shtc3Temperature.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an instance from the received raw data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.ticks">
+<code class="descname">ticks</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.ticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ticks (int) as received from the device.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_celsius">
+<code class="descname">degrees_celsius</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_celsius" title="Permalink to this definition">¶</a></dt>
+<dd><p>The converted temperature in °C.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_fahrenheit">
+<code class="descname">degrees_fahrenheit</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Temperature.degrees_fahrenheit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The converted temperature in °F.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.shtc3.response_types.</code><code class="descname">Shtc3Humidity</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/response_types.html#Shtc3Humidity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a measurement response for the humidity.</p>
+<p>With the <a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.ticks" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.ticks"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ticks</span></code></a> you can access the raw data as received from the
+device. For the converted value the <a class="reference internal" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.percent_rh" title="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.percent_rh"><code class="xref py py-attr docutils literal notranslate"><span class="pre">percent_rh</span></code></a> attribute is
+available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ticks</strong> (<em>int</em>) – The read ticks as received from the device.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/shtc3/response_types.html#Shtc3Humidity.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an instance from the received raw data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.ticks">
+<code class="descname">ticks</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.ticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ticks (int) as received from the device.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.percent_rh">
+<code class="descname">percent_rh</code><a class="headerlink" href="#sensirion_i2c_sht.shtc3.response_types.Shtc3Humidity.percent_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>The converted humidity in %RH.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 <div class="section" id="sht4x">
 <h2>SHT4x<a class="headerlink" href="#sht4x" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-sensirion_i2c_sht.sht4x.device">
@@ -2121,8 +2800,8 @@ the data with all CRCs removed.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id2">
-<h3>Data Types<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Data Types<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-sensirion_i2c_sht.sht4x.data_types"></span><dl class="class">
 <dt id="sensirion_i2c_sht.sht4x.data_types.Sht4xRepeatability">
 <em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sht4x.data_types.</code><code class="descname">Sht4xRepeatability</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sht4x/data_types.html#Sht4xRepeatability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht4x.data_types.Sht4xRepeatability" title="Permalink to this definition">¶</a></dt>
@@ -2191,8 +2870,8 @@ temperature and humidity measurement.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id3">
-<h3>Response Types<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Response Types<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-sensirion_i2c_sht.sht4x.response_types"></span><dl class="class">
 <dt id="sensirion_i2c_sht.sht4x.response_types.Sht4xTemperature">
 <em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sht4x.response_types.</code><code class="descname">Sht4xTemperature</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht4x/response_types.html#Sht4xTemperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht4x.response_types.Sht4xTemperature" title="Permalink to this definition">¶</a></dt>
@@ -2681,8 +3360,8 @@ the data with all CRCs removed.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id4">
-<h3>Data Types<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Data Types<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-sensirion_i2c_sht.sts4x.data_types"></span><dl class="class">
 <dt id="sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability">
 <em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.data_types.</code><code class="descname">Sts4xRepeatability</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/data_types.html#Sts4xRepeatability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.data_types.Sts4xRepeatability" title="Permalink to this definition">¶</a></dt>
@@ -2709,8 +3388,8 @@ temperature measurement.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id5">
-<h3>Response Types<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Response Types<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-sensirion_i2c_sht.sts4x.response_types"></span><dl class="class">
 <dt id="sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature">
 <em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sts4x.response_types.</code><code class="descname">Sts4xTemperature</code><span class="sig-paren">(</span><em>ticks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sts4x/response_types.html#Sts4xTemperature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sts4x.response_types.Sts4xTemperature" title="Permalink to this definition">¶</a></dt>
@@ -2802,6 +3481,7 @@ device. For the converted values you can choose between
             <dd><a href="../0.2.0/api.html">0.2.0</a></dd>
             <dd><a href="../0.2.1/api.html">0.2.1</a></dd>
             <dd><a href="../0.2.2/api.html">0.2.2</a></dd>
+            <dd><a href="../0.3.0/api.html">0.3.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
