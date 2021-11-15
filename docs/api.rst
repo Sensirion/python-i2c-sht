@@ -49,6 +49,31 @@ Response Types
 .. automodule:: sensirion_i2c_sht.sht3x.response_types
 
 
+SHTC3
+-----
+
+Shtc3I2cDevice
+~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.shtc3.device
+
+
+Shtc3I2cCommand
+~~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.shtc3.commands
+
+Data Types
+~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.shtc3.data_types
+
+Response Types
+~~~~~~~~~~~~~~
+
+.. automodule:: sensirion_i2c_sht.shtc3.response_types
+
+
 SHT4x
 -----
 

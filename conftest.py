@@ -11,6 +11,7 @@ from sensirion_i2c_sht.sht3x import Sht3xI2cDevice
 from sensirion_i2c_sht.sht4x import Sht4xI2cDevice
 import pytest
 
+from sensirion_i2c_sht.shtc3 import Shtc3I2cDevice
 from sensirion_i2c_sht.sts4x import Sts4xI2cDevice
 
 
@@ -124,6 +125,23 @@ def sts4x(bridge):
     sts4x = Sts4xI2cDevice(I2cConnection(i2c_transceiver))
 
     yield sts4x
+
+    # make sure the channel is powered off after executing tests
+    bridge.switch_supply_off(SensorBridgePort.ONE)
+
+
+@pytest.fixture
+def shtc3(bridge):
+    # Configure SensorBridge port 1 for SHTC3
+    bridge.set_i2c_frequency(SensorBridgePort.ONE, frequency=100e3)
+    bridge.set_supply_voltage(SensorBridgePort.ONE, voltage=3.3)
+    bridge.switch_supply_on(SensorBridgePort.ONE)
+
+    # Create SHTC3 device
+    i2c_transceiver = SensorBridgeI2cProxy(bridge, port=SensorBridgePort.ONE)
+    shtc3 = Shtc3I2cDevice(I2cConnection(i2c_transceiver))
+
+    yield shtc3
 
     # make sure the channel is powered off after executing tests
     bridge.switch_supply_off(SensorBridgePort.ONE)
