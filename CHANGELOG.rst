@@ -1,5 +1,9 @@
 CHANGELOG
 ---------
+0.4.0
+:::::
+- Add ART mode for SHT3x driver
+
 0.3.0
 :::::
 - Add ``Shtc3I2cDevice``
