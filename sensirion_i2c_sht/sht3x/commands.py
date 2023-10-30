@@ -173,6 +173,7 @@ class Sht3xI2cCmdEnableART(Sht3xI2cCmdBase):
             timeout=0.,
         )
 
+
 class Sht3xI2cCmdHeaterOn(Sht3xI2cCmdBase):
     """
     SHT3x command to enable the internal heater.

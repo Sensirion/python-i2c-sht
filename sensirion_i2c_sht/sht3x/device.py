@@ -59,7 +59,7 @@ class Sht3xI2cDevice(I2cDevice):
         Enable the ART (accelerated response time
         """
         return self.execute(Sht3xI2cCmdEnableART())
-    
+
     def heater_on(self):
         """
         Switch on the internal heater.
