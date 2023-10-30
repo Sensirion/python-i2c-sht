@@ -157,6 +157,23 @@ class Sht3xI2cCmdMeasLowRes(Sht3xI2cCmdMeasBase):
         )
 
 
+class Sht3xI2cCmdEnableART(Sht3xI2cCmdBase):
+    """
+    SHT3x command to enable the ART (accelerated response time) feature.
+    """
+    def __init__(self):
+        """
+        Constructs a new command.
+        """
+        super(Sht3xI2cCmdEnableART, self).__init__(
+            command=0x2B32,
+            tx_data=b'',
+            rx_length=None,
+            read_delay=0.,
+            timeout=0.,
+        )
+
+
 class Sht3xI2cCmdHeaterOn(Sht3xI2cCmdBase):
     """
     SHT3x command to enable the internal heater.
