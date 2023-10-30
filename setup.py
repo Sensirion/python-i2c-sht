@@ -41,10 +41,13 @@ setup(
     ],
     extras_require={
         'test': [
-            'flake8~=3.6.0',
+            'flake8~=3.6.0;python_version<="3.6"',
+            'flake8~=6.0;python_version>"3.6"',
             'mock~=3.0.0',
-            'pytest~=3.10.0',
-            'pytest-cov~=2.6.0',
+            'pytest~=3.10.0;python_version<="3.6"',
+            'pytest~=7.1;python_version>"3.6"',
+            'pytest-cov~=2.6.0;python_version<="3.6"',
+            'pytest-cov~=3.0;python_version>"3.6<"',
             'sensirion-shdlc-sensorbridge~=0.1.1',
             'sensirion-i2c-driver~=1.0.0',
         ],
