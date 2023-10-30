@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; sensirion-i2c-sht 0.3.0 documentation</title>
+  <title>Index &mdash; sensirion-i2c-sht 0.4.0 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.4.0
               </div>
             
           
@@ -197,6 +197,8 @@
 </li>
         <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase.__init__">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase method)</a>
 </li>
+        <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.__init__">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART method)</a>
+</li>
         <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff.__init__">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff method)</a>
 </li>
         <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOn.__init__">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOn method)</a>
@@ -233,6 +235,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#sensirion_i2c_sht.sht3x.response_types.Sht3xStatusRegister.alert_pending_status">alert_pending_status (sensirion_i2c_sht.sht3x.response_types.Sht3xStatusRegister attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.art_enable">art_enable() (sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -322,6 +328,8 @@
         <li><a href="api.html#sensirion_i2c_sht.sht2x.commands.Sht2xI2cMeasureTemperature.interpret_response">(sensirion_i2c_sht.sht2x.commands.Sht2xI2cMeasureTemperature method)</a>
 </li>
         <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase.interpret_response">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase method)</a>
+</li>
+        <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.interpret_response">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART method)</a>
 </li>
         <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff.interpret_response">(sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff method)</a>
 </li>
@@ -432,10 +440,12 @@
 </li>
       <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdBase">Sht3xI2cCmdBase (class in sensirion_i2c_sht.sht3x.commands)</a>
 </li>
-      <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff">Sht3xI2cCmdHeaterOff (class in sensirion_i2c_sht.sht3x.commands)</a>
+      <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART">Sht3xI2cCmdEnableART (class in sensirion_i2c_sht.sht3x.commands)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOff">Sht3xI2cCmdHeaterOff (class in sensirion_i2c_sht.sht3x.commands)</a>
+</li>
       <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdHeaterOn">Sht3xI2cCmdHeaterOn (class in sensirion_i2c_sht.sht3x.commands)</a>
 </li>
       <li><a href="api.html#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdMeasBase">Sht3xI2cCmdMeasBase (class in sensirion_i2c_sht.sht3x.commands)</a>
@@ -521,7 +531,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021 Sensirion AG, Switzerland
+        &copy; Copyright 2023 Sensirion AG, Switzerland
 
     </p>
   </div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Reference &mdash; sensirion-i2c-sht 0.3.0 documentation</title>
+  <title>API Reference &mdash; sensirion-i2c-sht 0.4.0 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.4.0
               </div>
             
           
@@ -682,6 +682,12 @@ Humidity response object.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.art_enable">
+<code class="descname">art_enable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/device.html#Sht3xI2cDevice.art_enable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.art_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the ART (accelerated response time</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.heater_on">
 <code class="descname">heater_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/device.html#Sht3xI2cDevice.heater_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.device.Sht3xI2cDevice.heater_on" title="Permalink to this definition">¶</a></dt>
 <dd><p>Switch on the internal heater.</p>
@@ -1022,6 +1028,39 @@ Humidity response object.</li>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART">
+<em class="property">class </em><code class="descclassname">sensirion_i2c_sht.sht3x.commands.</code><code class="descname">Sht3xI2cCmdEnableART</code><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/commands.html#Sht3xI2cCmdEnableART"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHT3x command to enable the ART (accelerated response time) feature.</p>
+<dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sensirion_i2c_sht/sht3x/commands.html#Sht3xI2cCmdEnableART.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.interpret_response">
+<code class="descname">interpret_response</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#sensirion_i2c_sht.sht3x.commands.Sht3xI2cCmdEnableART.interpret_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the CRCs of the received data from the device and returns
+the data with all CRCs removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>bytes</em>) – Received raw bytes from the read operation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The received bytes, or None if there is no data received.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://sensirion.github.io/python-i2c-driver/api.html#sensirion_i2c_driver.errors.I2cChecksumError" title="(in Sensirion I²C Python Driver v1.0.1)"><strong>I2cChecksumError</strong></a> – If a received CRC was wrong.</td>
 </tr>
 </tbody>
 </table>
@@ -2284,7 +2323,7 @@ available.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021 Sensirion AG, Switzerland
+        &copy; Copyright 2023 Sensirion AG, Switzerland
 
     </p>
   </div>
