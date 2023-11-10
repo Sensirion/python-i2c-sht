@@ -4,6 +4,9 @@ This repository contains the Python driver to communicate with Sensirion
 temperature and humidity sensors using the I²C interface. For details, please
 read the package description in [README.rst](README.rst).
 
+Note that we recommend to use the new product specific drivers for
+[SHT3x](https://github.com/Sensirion/python-i2c-sht3x) and
+[SHT4x](https://github.com/Sensirion/python-i2c-sht4x).
 
 ## Usage
 
