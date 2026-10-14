@@ -4,8 +4,13 @@
 from __future__ import absolute_import, division, print_function
 from sensirion_i2c_driver.device import I2cDevice
 from sensirion_i2c_driver.errors import I2cError
-from .commands import Sht2xI2cMeasureTemperature, Sht2xI2cMeasureHumidity, \
-    Sht2xI2cCmdSoftReset, Sht2xI2cCmdReadOtp, Sht2xI2cCmdReadMetalRom
+from .commands import (
+    Sht2xI2cMeasureTemperature,
+    Sht2xI2cMeasureHumidity,
+    Sht2xI2cCmdSoftReset,
+    Sht2xI2cCmdReadOtp,
+    Sht2xI2cCmdReadMetalRom,
+)
 
 
 class Sht2xI2cDevice(I2cDevice):
@@ -37,7 +42,7 @@ class Sht2xI2cDevice(I2cDevice):
               Humidity response object.
         :rtype:
             tuple
-        """  # noqa: E501
+        """
         temperature = self.execute(Sht2xI2cMeasureTemperature())
         humidity = self.execute(Sht2xI2cMeasureHumidity())
         if self.connection.is_multi_channel:
@@ -83,8 +88,7 @@ class Sht2xI2cDevice(I2cDevice):
                 elif isinstance(part2, I2cError):
                     serials.append(part2)
                 else:
-                    sn_otp = part1[0] << 24 | part1[1] << 16 | \
-                             part1[2] << 8 | part1[3]
+                    sn_otp = part1[0] << 24 | part1[1] << 16 | part1[2] << 8 | part1[3]
                     sn = (part2[1] << 48) | sn_otp << 16 | part2[0]
                     serials.append(sn)
         else:
@@ -93,10 +97,9 @@ class Sht2xI2cDevice(I2cDevice):
             elif isinstance(data_words_metrom, I2cError):
                 serials = data_words_metrom
             else:
-                sn_otp = data_bytes_otp[0] << 24 | \
-                         data_bytes_otp[1] << 16 | data_bytes_otp[2] << 8 | \
-                         data_bytes_otp[3]
-                sn = (data_words_metrom[1] << 48) | sn_otp << 16 | \
-                    data_words_metrom[0]
+                sn_otp = (data_bytes_otp[0] << 24 | data_bytes_otp[1] << 16 |  # noqa: W504
+                          data_bytes_otp[2] << 8 | data_bytes_otp[3])
+
+                sn = (data_words_metrom[1] << 48) | sn_otp << 16 | data_words_metrom[0]
                 serials = sn
         return serials
